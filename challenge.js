@@ -355,59 +355,547 @@ const arrayNum = [
     name: "Sara",
   },
 ];
-const keyArr = arrayNum.keys()
-for (let key of keyArr){
+const keyArr = arrayNum.keys();
+for (let key of keyArr) {
   console.log(key);
 }
 
-const entriesArr = arrayNum.entries()
-for (let entry of entriesArr){
+const entriesArr = arrayNum.entries();
+for (let entry of entriesArr) {
   console.log(entry);
 }
-const valuesErr = arrayNum.values()
-for (let value of valuesErr){
+const valuesErr = arrayNum.values();
+for (let value of valuesErr) {
   console.log(value);
 }
 
-const arrayLong  = ["ra", "ra", "sdsfs", "kooo"]
-arrRemovedDuplicates= new Set(arrayLong)
+const arrayLong = ["ra", "ra", "sdsfs", "kooo"];
+arrRemovedDuplicates = new Set(arrayLong);
 console.log(arrRemovedDuplicates);
 
 //QUICK SORT
 
-const unsortedArr = [3,6,7,8,9,8,7,4,34,8,2,9,6,8,4,]
+const unsortedArr = [3, 6, 7, 8, 9, 8, 7, 4, 34, 8, 2, 9, 6, 8, 4];
 
-const sortArray = (arr)=>{
+const sortArray = (arr) => {
+  if (arr.length < 1) return arr;
 
-if (arr.length <1) return arr
-
-let pivot = arr[Math.floor(arr.length/2)]
+  let pivot = arr[Math.floor(arr.length / 2)];
   let left = [];
   let rigth = [];
-  let equal =[];
+  let equal = [];
 
-  for (let item of arr){
-    if (item < pivot){
-      left.push(item)
-    }
-    else if (item > pivot){
-          rigth.push(item)
-    }
-  else equal.push(item)
+  for (let item of arr) {
+    if (item < pivot) {
+      left.push(item);
+    } else if (item > pivot) {
+      rigth.push(item);
+    } else equal.push(item);
   }
 
+  return sortArray(left).concat(equal, sortArray(rigth));
+};
 
-return sortArray(left).concat(equal,sortArray(rigth))
-}
+console.log(sortArray(unsortedArr));
 
- console.log( sortArray(unsortedArr))
+const sorted = unsortedArr.sort((a, b) => a - b);
+console.log(sorted);
 
- const sorted = unsortedArr.sort((a,b)=>a-b)
- console.log(sorted);
-
-const arr12 = [1,2,3,4,5,6,7,8,9,8,6,5,4,3,2,7,4,5,5,6,6,6,6]
-const target =5
-const found = arr12.findIndex((item)=>item ===target);
+const arr12 = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 6, 5, 4, 3, 2, 7, 4, 5, 5, 6, 6, 6, 6,
+];
+const target = 5;
+const found = arr12.findIndex((item) => item === target);
 console.log(found);
 
+//REVERSE STRING
 
+const revereceString = (str) => {
+  if (str.length < 1) return str;
+
+  return str.split("").reverse().join("");
+};
+console.log(revereceString("Hello Bob"));
+
+// STRING IS PALINDROME
+
+const checkPalindrome = (str) => {
+  let reversed = str.split("").reverse().join("");
+  return str === reversed ? true : false;
+};
+console.log(checkPalindrome("AzORA"));
+
+for (let i = 0; i <= 100; i++) {
+  if (i % 15 === 0) console.log(`${i},"FIZZBUZZ"`);
+  else if (i % 5 === 0) console.log(`${i},"FIZZ"`);
+  else if (i % 3 === 0) console.log(`${i},"BUZZ"`);
+  else console.log(i);
+}
+
+const findMax = (arr) => {
+  return Math.max(...arr);
+};
+console.log(findMax([1, 2, 3, 4, 5]));
+
+const findMin = (arr) => {
+  return Math.min(...arr);
+};
+console.log(findMin([8, 9, 99]));
+
+//FIND PRIME NUMBERS
+
+const isPrime = (num) => {
+  if (num <= 1) return false;
+  if (num % 2 === 0) return false;
+  for (let i = 3; i <= Math.sqrt(num); i += 2) {
+    if (num % i === 0) return false;
+  }
+  return true;
+};
+console.log(isPrime(17));
+
+const findPrime = (arr) => {
+  arr.forEach((num) => {
+    if (isPrime(num)) console.log(num);
+  });
+};
+findPrime([1, 2, 3, 4, 5, 6, 11]);
+
+//Fibonacci ***Fibonacci sequence is a series of numbers
+// where each number is the sum of the two preceding ones,
+// usually starting with 0 and 1.
+
+const fibonacci = (num) => {
+  let seq = [];
+  seq[0] = 0;
+  seq[1] = 1;
+
+  for (let i = 2; i < num; i++) {
+    seq[i] = seq[i - 1] + seq[i - 2];
+  }
+  return seq.slice(0, num + 1);
+};
+console.log(fibonacci(10));
+//FIBINACCI WITH ARRAY
+
+const fibonacchiTwo = (num) => {
+  fibArr = [1, 2];
+
+  for (let i = 2; i <= num; i++) {
+    fibArr.push(fibArr[i - 1] + fibArr[i - 2]);
+  }
+  return fibArr.slice(0, num + 1);
+};
+console.log(fibonacchiTwo(10));
+
+//INTERSECTIONS
+
+const arr1 = [1, 2, 3, 4, 5];
+const arr2 = [4, 5, 6, 7, 8, 9];
+
+const intersection = () => {
+  return arr1.filter((item) => arr2.includes(item));
+};
+console.log(intersection());
+
+const intersection2 = () => {
+  return arr1.reduce((acc, curr) => {
+    if (arr2.includes(curr) && !acc.includes(curr)) acc.push(curr);
+    return acc;
+  }, []);
+};
+
+console.log(intersection2(arr1, arr2));
+
+const intersection3 = () => {
+  set1 = new Set(arr1);
+  set2 = new Set(arr2);
+  return [...set1].filter((item) => set2.has(item));
+};
+console.log(intersection3());
+
+const int = () => {
+  return arr1.filter((item) => arr2.includes(item));
+};
+console.log(int());
+
+const int2 = () => {
+  set1 = new Set(arr1);
+  set2 = new Set(arr2);
+  return [...set1].filter((item) => set2.has(item));
+};
+console.log(int2());
+
+const arr3 = [1, 2, 3, 4, 5, 6];
+const arr4 = [3, 4, 5, 6, 7];
+const int3 = (arr3, arr4) => {
+  return arr3.reduce((acc, curr) => {
+    if (arr4.includes(curr) && !acc.includes(curr)) {
+      acc.push(curr);
+    }
+    return acc;
+  }, []);
+};
+console.log(int3(arr3, arr4));
+
+// THE LONGEST WOrd LENGTH
+
+const sentence = "Hello my beatuful dog ";
+
+const longestLengthOfWord = (word) => {
+  const lengths = sentence.split(" ").map((word) => word.length);
+  return Math.max(...lengths);
+};
+console.log(longestLengthOfWord());
+
+//THE LONGEST WORD
+
+const longestWord = (sentence) => {
+  const words = sentence.split(" ");
+  let longestWord = "";
+  let wordLength = 0;
+
+  words.forEach((word) => {
+    word.length;
+    if (word.length > wordLength) {
+      wordLength = word.length;
+      longestWord = word;
+    }
+  });
+  return longestWord;
+};
+console.log(longestWord(sentence));
+
+///COUNT WOWELS IN STRING
+
+const strW = "Hello from Goettingen";
+const countWowels = () => {
+  const wowels = "AOUEIYaoueiy";
+  let count = 0;
+
+  for (char of strW) {
+    if (wowels.includes(char)) count++;
+  }
+  return count;
+};
+console.log(countWowels());
+
+//Intersection
+
+const array7 = [1, 2, 3, 4, 5, 6];
+const array8 = [3, 7, 8, 9, 1, 5];
+const common = array7.filter((item) => array8.includes(item));
+console.log(common);
+
+const fibonacchi3 = (num) => {
+  arrF = [1, 2];
+  for (let i = 2; i <= num; i++) {
+    arrF.push(arrF[i - 1] + arrF[i - 2]);
+  }
+  return arrF.slice(0, num + 1);
+};
+console.log(fibonacchi3(6));
+
+const fibonacchi4 = (num) => {
+  newArr = [1, 2];
+  for (let i = 2; i <= num; i++) newArr.push(newArr[i - 1] + newArr[i - 2]);
+
+  return newArr.slice(0, num + 1);
+};
+console.log(fibonacchi3(8));
+
+///PRIME NUMBERS
+
+const primeNum = (num) => {
+  if ((num = 0)) return false;
+  else if ((num = 1)) return false;
+  else if (num % 2 === 0) return false;
+  for (let i = 3; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+  return true;
+};
+console.log(primeNum(20));
+
+///FACTORIAL (n=5; 5*4*3*2*1)
+
+const findFactorial = (num) => {
+  if (num < 1) return 1;
+
+  return findFactorial(num - 1) * num;
+};
+console.log(findFactorial(5));
+
+///FIND PAIRS WITH GIVEN SUM
+
+const findPairs = (arr, num) => {
+  let pars = [];
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++)
+      if (arr[i] + arr[j] === num) pars.push([arr[i], arr[j]]);
+  }
+  return pars;
+};
+console.log(findPairs([2, 3, 4, 5, 6, 7, 8, 9], 8));
+
+const checkbalanced = (str) => {
+  const opened = "(";
+  const closed = ")";
+  let stack = [];
+
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === opened) stack.push(opened);
+
+    else if (str[i] === closed) {
+      if (stack.length === 0) {return false}
+  
+      stack.pop();
+    }
+  
+  }
+   return stack.length === 0;
+};
+console.log(checkbalanced("ccfgj(a((a)))"));
+
+const checkbalanced2 =(str)=>{
+  const opened = "({["
+  const closed = ")}]"
+  let stack = [  ]
+
+    for (let i =0; i<str.length; i ++){
+      if (opened.includes(str[i]))
+        stack.push(str[i])
+      
+
+      if (closed.includes(str[i])){
+        if (stack.length===0) {return false}
+
+       const lastOpened= stack.pop()
+
+       if(opened.indexOf(lastOpened) !== closed.indexOf(str[i]))
+       return false
+      }
+}return stack.length === 0
+}
+    
+
+
+
+console.log(checkbalanced2("CGH([])"));
+
+
+const checkBal = (str)=>{
+  const opened = "(";
+  const closed = ")";
+  const stack = [];
+
+  for(let i = 0; i<str.length; i++){
+
+if (str[i]===opened) 
+  {stack.push(opened)}
+
+else if (str[i]===closed) {
+if(stack.length === 0){return false}
+stack.pop()
+}
+
+  }
+  return stack.length === 0;
+
+}
+console.log(checkBal("KKK())))UUUUU"));
+
+const checkBal2 =(str)=>{
+  const opened = "({[";
+  const closed = ")}]"
+  const stack = []
+
+  for( let i = 0; i < str.length; i++){
+    if (opened.includes(str[i])) {stack.push(opened)}
+
+    else if (closed.includes(str[i])){
+
+      if (stack.length === 0 ) {return false}
+
+      const lastOpened = stack.pop()
+
+      if(opened.indexOf(lastOpened) !== closed.indexOf(str[i])) {return false}
+
+
+    }
+  }
+  return stack.length === 0;
+}
+console.log(checkBal2("Dvb((("));
+
+const primeNumber =(n)=>{
+
+  if (n===1) return false
+ 
+
+  for ( let i = 2; i <= Math.sqrt(n); i++){
+    if (n % i ===0) return false
+  }
+return true
+}
+console.log(primeNumber(3));
+
+const fibo = (n)=>{
+ 
+  let fiboArr = [0,1]
+
+  for (let i=2; i<n; i++){
+  fiboArr.push(fiboArr[i-1] + fiboArr[i-2])
+  }
+  return fiboArr
+}
+console.log(fibo(9));
+
+const factorial = (n) =>{
+
+  if ( n===0 || n===1) return 1
+  let result =1
+
+  for (let i =n; i >=1; i--){
+result *=i
+  }
+return result
+}
+console.log(factorial(5));
+
+const fizzBuzz = (n)=>{
+
+for (let i =0; i<n; i++){
+
+  if (i%15===0) console.log("FizzBuzz");
+  else if(i%3 === 0) console.log("Buzz");
+ else if( i%5=== 0) console.log("Fizz");
+ else console.log(i);
+
+
+}
+
+}
+fizzBuzz(65)
+
+
+
+const reverceStr = (str)=>{
+  return str.split("").reverse().join("")
+
+}
+
+
+console.log(reverceStr("Hello"));
+
+const isPalindrome = (str)=>{
+  const revStr = str.split("").reverse().join("")
+  if (revStr !==str){
+    return false
+  }
+  return true
+}
+console.log(isPalindrome("AROuRA"));
+
+
+const isAnogram = (str, oppositeStr)=>{
+if (str.length !== oppositeStr.length){
+  return false
+
+}
+const sortedStr= str.split("").reverse().sort().join("")
+const soretedOppStr = oppositeStr.split("").sort().join("")
+if (sortedStr !==soretedOppStr){return false} 
+else return true
+}
+console.log(isAnogram("ola", "lol"));
+
+const findMax1 = (arr)=>{
+if(arr.length ===0) return undefined
+  let min = arr[0];
+  for(i=0; i <=arr.length;i++){
+    if(arr[i]<min)
+      min=arr[i]
+
+  }return min
+}
+console.log(findMax1([-2,-6,-7,987]));
+
+const findMax3 = (arr)=>{
+
+return Math.max(...arr)
+}
+console.log(findMax3([2,-3,4,5,6]));
+
+const findMax4 = (arr)=>{
+  const sorted = arr.sort((a,b)=>a-b)
+  return sorted[sorted.length-1]
+
+}
+console.log(findMax4([456,6,7,8]));
+
+const removeDuplicates = (arr)=>{
+ return new Set(arr)
+  
+}
+console.log(removeDuplicates([9,5,5,5,7,8]));
+
+///1. the length of the largest word //
+const finfTheLengthOfTheLargestWord =(sent)=>{
+const words = sent.split(" ")
+let largestlength = 0
+for(let i=0; i <words.length;i ++){
+  if (words[i].length>largestlength) 
+    largestlength=words[i].length
+}
+  
+return largestlength
+  }
+console.log(finfTheLengthOfTheLargestWord("Hello World I am here"));
+
+
+//2. which word is the largest  => position ?
+
+const largest =(sent)=>{
+const words = sent.split(" ")
+let largestLength = 0;
+let position =0;
+
+for (let i =0; i<words.length; i++)
+{
+  if (words[i].length > largestLength){
+    largestLength = words[i].length
+    position = i
+  }
+}return position
+}
+
+console.log(largest("Hello Globally I am here"));
+
+const sum = (arr)=>{
+  const result = arr.reduce((total,current)=>total + current)
+return result
+}
+console.log(sum([1,2,3,4,5,6,7,8,9]));
+
+const summArr =(arr)=>{
+let summ =0;
+for (let i =0; i<arr.length;i++){
+  summ += arr[i]}
+  return summ
+}
+console.log(summArr([1,2,3,4,5,6,7,8,9]));
+
+//the second largest
+
+const largestElement = (arr)=>{
+  let largest = 0;
+  let secondLargest =0
+  for(let i =0; i<=arr.length; i++){
+    if(arr[i]>largest) largest = arr[i]
+secondLargest= i-1
+  }
+  
+return secondLargest
+}
+console.log(largestElement([1,2,3,4,10]));
