@@ -899,3 +899,30 @@ secondLargest= i-1
 return secondLargest
 }
 console.log(largestElement([1,2,3,4,10]));
+
+//count wowels in string
+
+const countWowels2 = (str)=>{
+let count = 0;
+const wowels ="aoueyi"
+for (i=0; i <= str.length; i++)
+  {
+if(wowels.includes(str[i])){
+  count ++
+}
+  }
+  return count
+}
+console.log(countWowels2("hellooooo"));
+
+///intersection
+
+const findIntersection =(arr1,arr2)=>{
+  
+  const common = []
+  for( i=0; i<=arr1.length; i++)
+    if(!arr1.includes(arr2[i]))
+      common.push(arr2[i])
+    return common
+}
+console.log(findIntersection([1,2,3,4,5],[4,5,6,7,8,9]));
