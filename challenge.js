@@ -926,3 +926,206 @@ const findIntersection =(arr1,arr2)=>{
     return common
 }
 console.log(findIntersection([1,2,3,4,5],[4,5,6,7,8,9]));
+
+const mergeTwoSortedArrays = (arr1,arr2)=>{
+const sortedArr1 = arr1.sort((a,b)=>a-b)
+const sortedArr2 = arr2.sort((a,b)=>a-b)
+
+const arr3 =[];
+
+let i = 0; 
+let j = 0;
+
+while (i < sortedArr1.length && j < sortedArr2.length){
+if(sortedArr1[i] < sortedArr2[j]){
+  arr3.push(arr1[i])
+  i++
+}
+else arr3.push(arr2[j])
+j++
+
+}
+while(i<sortedArr1.length){
+  arr3.push(sortedArr1[i])
+  i++
+}
+
+while(j<sortedArr2[j]){
+  arr3.push(sortedArr2[j])
+  j++
+}
+return arr3
+}
+console.log(mergeTwoSortedArrays([1,2,3,6,7,8],[-9,10,11]));
+
+//sort an array
+
+const sortArr =(arr)=>{
+
+  for(let i =0; i<arr.length;i++){
+    let minIndex = i
+
+    for(let j = i+1; j<arr.length;j++){
+      if(arr[j]<arr[minIndex]){
+        minIndex=j
+      }
+    }
+
+    if(minIndex !== i){
+      let temp = arr[i]
+      arr[i] = arr[minIndex]
+      arr[minIndex] =temp
+    }
+  }
+  return arr
+}
+console.log(sortArr([5,6,7,8,97,6,3,-2]));
+
+//combine two sorted arrays
+
+const combine =(arr1,arr2)=>{
+const arrS1 = arr1.sort((a,b)=>a-b)
+const arrS2 = arr2.sort((a,b)=>a-b)
+let arrS3 = []
+let i =0;
+let j =0;
+
+while (i < arrS1.length || j<arrS2.length){
+if (arrS1[i] < arrS2[j]){
+arrS3.push(arrS1[i])
+i++
+} else{
+  arrS3.push(arrS2[j])
+  j++
+}
+}
+
+while (i<arrS1.length){
+  arrS3.push(arrS1[i])
+  i ++
+}
+while (j<arr2.length){
+  arrS3.push(arrS2[j])
+  j++
+}
+return arrS3
+}
+console.log(combine([1,2,3,4,0,-1],[5,0,6,7,8]));
+
+//find the largest word 
+
+const theLargest = (str) => {
+const arr = str.split( " ")
+let largest = ""
+let position = 0
+for (let i =0; i<arr.length; i++){
+if(arr[i].length > largest.length){
+  largest = arr[i]
+  position = i
+}
+}
+
+return {largest, position}
+
+}
+console.log(theLargest("Hello hikkkkkkkk I am here"));
+
+const countWow = (str) => {
+
+  let wow = "aoueyi";
+  let count = 0;
+  for (let i = 0; i<str.length; i++){
+    if(wow.includes(str[i])){
+      count ++
+    }
+  }
+  return count
+}
+console.log(countWow ("tralala"));
+
+// find all pairs with a given sum
+
+const Pairs = (sum) => {
+
+  
+
+
+}
+console.log(Pairs(20));
+
+//calculate missing number in array
+const missing = (arr)=>{
+
+  const n = arr.length +1;
+  const expectedSum = (n*(n+1)/2)
+  let realSum = 0
+
+  for (item of arr){
+    realSum += item
+  }
+  const missing =expectedSum - realSum
+  return missing
+}
+console.log(missing([1,2,3,4,6,7,8]));
+
+//compute the number of numericals in string
+const num =(str)=>{
+let count =0
+  for (let i =0; i < str.length; i++){
+    if(!isNaN(parseInt(str[i]))){
+       count++
+    }
+     
+  }
+
+return count
+}
+console.log(num("d 5 6 7 8 9 "));
+
+//non-matching char in string
+
+const nonMatching =(str,char)=>{
+  let arr =[]
+  for (let i =0;i<str.length; i++){
+if (str[i] ===char){
+  arr.push(str[i])
+}
+
+  }
+return arr
+}
+console.log(nonMatching("abcd1","1"));
+
+//total of matching int in arr
+const matchInt = (arr,matching)=>{
+  let count =0
+  for (let i =0; i < arr.length; i ++){
+if ( arr[i] === matching ){
+  count ++
+}
+
+  }
+return count
+}
+console.log(matchInt([1,2,3,4,5,"t","z",6,7,8,8,8, ],8));
+
+const revArr = (arr)=>{
+ let  reversed =[]
+for (let i = arr.length-1; i>=0; i--){
+  reversed.push(arr[i])
+}
+return reversed
+}
+console.log(revArr([1,2,3,4,5,6,7,8]));
+
+const revStr = (str)=>{
+  let res = ""
+for (let i = str.length-1; i>=0; i--)
+{
+res += str[i]
+
+}
+
+return res
+}
+console.log(revStr("hello"));
