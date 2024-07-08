@@ -1,5 +1,5 @@
 {
-  /*const getMinMax = function (arr) {
+  const getMinMax = function (arr) {
   const min = Math.min(...arr);
   const max = Math.max(...arr);
   return { min, max };
@@ -15,6 +15,9 @@ console.log(getArea(2, 4));
 
 const rectangleArea = (width, length) => length * width;
 console.log(rectangleArea(4, 8));
+
+
+
 
 // IIFE
 
@@ -171,11 +174,11 @@ console.log(capitalizedWords);
 
 const fibonacci = (n) => {
   if (n < 0) {
-    return [];
+    return undefined;
   }
 
   if (n === 1) {
-    return [0];
+    return [1];
   }
 
   const fibsec = [0, 1];
@@ -214,7 +217,7 @@ const reverceStr1 = (str) => {
 };
 console.log(reverceStr1("hello"));
 
-//find in array
+//find target in array
  
 const findInArr = (arr, target)=>{
 if (arr.lenfth < 1) return 
@@ -225,6 +228,8 @@ for ( let i =0; i<= arr.length;
   }  return 0
 }
 console.log(findInArr([1,2,3,4,5,6,7],3));
+
+//search trget using binary search
 
 const findAgain =(arr, target)=>{
 let firstPos = 0;
@@ -243,6 +248,8 @@ return -1
 
 }
 console.log( findAgain([1,2,3,4,5,6,7,555],555));
+
+//remove duplicates
 
 const arrayNum = [2,4,5,6,17,38,9,7,6,5,5]
 const newAr = new Set(arrayNum)
@@ -1086,7 +1093,7 @@ console.log(num("d 5 6 7 8 9 "));
 
 const nonMatching =(str,char)=>{
   let arr =[]
-  for (let i =0;i<str.length; i++){
+  for (let i =0;i<=char; i++){
 if (str[i] ===char){
   arr.push(str[i])
 }
@@ -1129,3 +1136,85 @@ res += str[i]
 return res
 }
 console.log(revStr("hello"));
+
+const fibon = (n)=>{
+if (n<0)return undefined;
+if ( n === 1) return [1]
+if (n===2) return[1,1]
+
+let f = [1,1]
+
+for (let i =2; i< n; i++){
+  let next = f[i-1] + f[i-2]
+  f.push(next)
+}
+return f
+}
+console.log(fibon(10));
+// n +(n-1)// 1,1,2,3,5,8,13,21,34,55
+
+const binarySearch = (arr, target)=>{
+
+
+let left =0;
+let right = arr.length-1 ///index of the last element
+
+while (left <= right) {
+  let middle = Math.floor((left+right)/2)
+
+  if(arr[middle]===target) {
+    return middle}
+  if (arr[middle] < target ){ 
+    left = middle +1 }
+  if (arr[middle] > target){
+    right= middle -1
+  }  
+ }
+ return -1
+}
+console.log(binarySearch([1,2,3,4,5],5));
+
+const fib = (n)=>{
+
+  if (n<0) return undefined;
+  if (n ===1) return [1];
+  if (n===2) return [1,1]
+
+  let fibArr = [1,1]
+
+ for (let i =2; i<n;i++){
+  let next = fibArr[i-1]+ fibArr[i-2]
+  fibArr.push(next)
+ }
+ return fibArr
+}
+console.log(fib(10));
+
+
+//factorial
+let factor =(n)=>{
+if (n<1) return undefined
+let result = 1
+
+  for(let i =2; i<n; i++){
+ result = result *i
+  }
+return result
+}
+console.log(factor(10));
+//10*9*8*7 // n*(n-1)
+/////1 
+
+/////STRINGS
+const reverceString =(str)=>{
+
+let rev = ""
+for( let i =str.length-1; i >= 0; i--){
+  rev = rev +str.charAt(i)
+  
+
+}  
+return rev
+}
+console.log(reverceString("hello"));
+
