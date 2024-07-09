@@ -272,3 +272,155 @@ values.push(value)
   return {keys,values}
 }
 console.log(getKeysAndValues(person));
+
+
+// calculet number of wowels 
+
+const calculateNumOfWowels = (str) =>{
+let wowels ="aoueyi"
+let num = 0
+
+for (let i=0; i< str.length; i++){
+    if (wowels.includes(str[i])){
+        num +=1
+    }
+}
+return num
+}
+console.log(calculateNumOfWowels("hello"));
+
+// find non-matching characters in string
+
+const findNotMatching = (str,target)=>{
+
+    
+    let count =0
+    for (let i = 0; i< str.length; i++){
+        if (target !== str[i]){
+       
+            count ++
+
+        }
+    }
+    return count
+}
+console.log(findNotMatching("abcdefGGGGGg"),"G");
+
+// number of numericals in string 
+
+const numOfNumericals = (str)=>{
+    let count =0
+    for ( let i = 0; i< str.length; i++){
+        if ( !isNaN(parseInt(str[i])) ){
+            count ++
+        }
+    }
+    return count
+}
+
+console.log(numOfNumericals("1234567assddffgghgj"));
+
+
+// check for missing number
+const checkMissing = (arr)=>{
+const actualSum = arr.reduce((total,curr)=>total+curr,0)
+const n = arr.length +1
+const expectedSum = n*(n+1)/2
+const missing = expectedSum - actualSum
+return missing
+}
+console.log(checkMissing([1,2,3,5,6]));
+
+///check if string is anagram
+
+const checkAnagramm = (str1, str2)=>{
+if( str1.length !== str2.length) return false
+let charCount1 = {}
+let charCount2 ={}
+
+for (let i =0; i<str1.length; i++){
+    charCount1[str1[i]]= (charCount1[str1[i]] ||0 ) +1
+}
+for (let i =0; i<str2.length; i++){
+    charCount2[str2[i]]= (charCount2[str2[i]] ||0 ) +1
+}
+
+for (char in charCount1){
+    if(charCount1[char] !== charCount2[char]) return false
+}
+return true
+}
+console.log(checkAnagramm("abcd", "dcab"));
+
+// find the length of the longest word
+
+const findTheLongestWord = (str)=>{
+
+    const arr = str.split (" ")
+    let longest = ""
+    let secondLongest = ""
+   
+   
+    for (let i =0; i < arr.length; i++){
+        if ( arr[i].length > longest.length){
+             secondLongest =longest
+             longest = arr[i]
+        }
+        else if ( arr[i].length > secondLongest.length && arr[i].length !== longest.length){
+            secondLongest = arr[i]
+        }
+    }
+       
+return secondLongest
+}
+console.log(findTheLongestWord( "Hello I am here"));
+
+//count al characters in string
+
+const countCharacters = (str)=>{
+
+    let result = {}
+    let arr = str.split("")
+    for (let i=0; i<arr.length; i++){
+      char = arr[i]
+    result[char] =( result[char] ||0 )+1
+
+    }
+    return result
+}
+console.log(countCharacters("hello word"));
+
+//reverse string 
+
+const revStr =(str)=>{
+let reversed =""
+    for(let i=str.length; i>=0; i--){
+             reversed += str.charAt(i)
+    }
+   return reversed
+}
+
+console.log(revStr("abc"));
+
+const anagram1 = (str1,str2) =>{
+if(str1.length !== str2.length ){return false}
+
+let charactersStr1 ={}
+let charactersStr2 ={}
+
+for (let i=0; i<str1.length; i++){
+    char = str1[i]
+    charactersStr1[char] = (charactersStr1[char]||0 )+1
+}
+
+for (let j=0; j<str1.length; j++){
+    char = str2[j]
+    charactersStr2[char] = (charactersStr2[char]||0 )+1
+}
+
+if ( charactersStr1[char] !==  charactersStr2[char]){return false}
+
+return true
+
+}
+console.log(anagram1( "abdc","acd"));
