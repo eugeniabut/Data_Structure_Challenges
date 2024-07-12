@@ -1,4 +1,4 @@
-/// fibonacci sequence
+/// 1 fibonacci sequence
 
 const fibo = (n) => {
   if (n < 0) return undefined;
@@ -81,7 +81,7 @@ a= temp
 
 console.log("common deviser",findCommonDeviser(36, 24));
 
-// Find all prime factors of n 1)divisibility by2; 2)by other from 3to Math.sqrt; 3)if >2, then itsenf is a prime
+// 5 Find all prime factors of n 1)divisibility by2; 2)by other from 3to Math.sqrt; 3)if >2, then itsenf is a prime
 
 const findPrimeFactors = (n) => {
   let factors = [];
@@ -108,7 +108,7 @@ const findPrimeFactors = (n) => {
 };
 console.log("Answer", findPrimeFactors(30));
 
-//Find the largest prime factor of n . Intiate maxPrime = 1. Instread of pushing just update maxFactor
+// 6 Find the largest prime factor of n . Intiate maxPrime = 1. Instread of pushing just update maxFactor
 
 const findMaxPrimeFactor = (n)=>{
 let maxFactor = 1
@@ -133,7 +133,7 @@ return maxFactor
 }
 console.log("MaxFactor",findMaxPrimeFactor(75));
 
-// find all pairs with a given sum
+// 7 find all pairs with a given sum
 
 const findAllPairs = (arr, sum)=>{
 let pairs = []
@@ -146,118 +146,14 @@ let pairs = []
 }
 console.log((findAllPairs([1,2,3,4,5,6],10)))
 
+///Factorial
+
 const factorial = (n)=>{
 let factorial = 1
   for (let i =2; i<=n; i++)
-    {factorial = factorial * i}
+    {factorial *= i}
   return factorial
 
 }
 console.log(factorial(6));
 
-const fibon =(n)=>{
-  
-  let prevPrev =1;
-  let prev = 2
-  let curr = 0
-
-  for (let i =3; i<=n;i++){
-    curr = prev + prevPrev
-    prevPrev = prev
-    prev = curr
-  }
-return curr
-}
-console.log(fibon(5));
-let arr =[1,2]
-const fibSec1 = (n)=>{
-  for (let i =2; i<=n; i++){
- arr.push(arr[i-1]+ arr[i-2])
-  }
-  return arr
-}
-console.log(fibSec1(5));
-
-const prime =(arr)=>{
-  newArr =[]
- 
-  for (let i=3; i<arr.length; i++){
-   if ( arr[i] % Math.sqrt(arr[i])!==0)
-     newArr.push(arr[i])
-  }
-
-return newArr
-}
-
-console.log("prime",prime([6,7,8,9,13]));
-
-//sum digits 
-const sumDigits2 =(n)=>{
-  let sum =0
-while(n>0){
-    sum += n%10
-  n = Math.floor(n/10)
-}
-
-
-return sum
-}
-console.log(sumDigits2(123));
-
-// large common divider
-const largeComDivider = (a,b)=>{
-while(b!==0){
-    let temp = b
-   b = a%b
-   a =temp
-}
-
-
-   return a
-}
-console.log(largeComDivider(24,80));
-
-// find all prime factors  for n
-
-const findPrimeFactors1 = (n)=>{
-let arr =[]
-while(n%2 ===0){
-    arr.push(2)
-n = n/2
-}
-
-
-for (let i =3; i <= Math.sqrt(n);i+=2){
-  if(n%i ===0)
-  arr.push(i)
-  n =n/i
-}
-if (n>2){
-   arr.push(n) 
-}
-return arr
-}
-console.log(findPrimeFactors1(75));
-
-
-// max factor 
-const findMaxFactor = (n)=>{
-let maxfactor =1
-
-  while (n%2===0){
-maxfactor =2
-n /=2
-  }
-
-  for (let i =3; i<=Math.sqrt(n); i+=2){
-    if(n%i ===0){
-      maxfactor=i
-      n /=i
-    }
-
-    if(n<2)
-      maxfactor =n
-  }
-  return n
-}
-console.log(findMaxFactor(75));
