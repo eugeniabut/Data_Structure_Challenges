@@ -58,3 +58,28 @@ console.log(person1.isAdult());
 
 console.log(Person.countPersons()); // 2
 console.log(Person.countAges(persons)); // 2
+
+class Node {
+    constructor (data,next=0){
+this.data =data
+this.next =next
+    }
+}
+
+class LinkedList{
+    constructor(head,size){
+        this.head =null
+        this.size=0;
+
+    }
+
+    insertFirst(data){
+
+        this.head = new Node(data,this.head)
+        this.size++
+    }
+   
+}
+const ll = new LinkedList
+ll.insertFirst(100)
+console.log (ll)
