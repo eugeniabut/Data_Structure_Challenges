@@ -33,7 +33,7 @@ insertlast (data){
 }
 
 insertAt(data, index) {
-    if (index > 0 && index > this.size) { return; }
+    if (index <0 || index > this.size) { return; }
     if (index === 0) {                              //create a head
         this.head = new Node(data, this.head);
         this.size++;
