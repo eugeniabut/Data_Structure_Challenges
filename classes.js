@@ -253,8 +253,122 @@ console.log(student1);
 student1.getNote()
 student1.setNote(5)
 
-/// 3. Polymorphism allows objects of different classes to be treated 
-//   as objects of a common super class. It's often used when dealing with inheritance.
+/// 3. Polymorphism 
+
+class Payment {
+    process(){
+        console.log("payment");
+    }
+}
+class PaypalPayment extends Payment{
+    process(){
+        console.log("Paypal payment");
+    }
+}
+class CardPayment extends Payment{
+    process(){
+        console.log("Card payment");
+    }
+}
+
+let payments = [new PaypalPayment, new CardPayment]
+
+for (let payment of payments){
+   payment.process()
+}
+
+
 //4. Abstract Classes and Methods
+
+class Animal{
+    constructor( ){
+              if(new.target===Animal){
+            throw new TypeError("cannot construct animal instance directly")
+        }
+   } 
+speak(){
+        throw new Error("  method speak() must be implemented")
+    }  
+
+
+}
+
+class Dog{
+    speak(){console.log("wow");}
+}
+class Cat{
+    speak(){console.log("miau");}
+}
+
+const myDog = new Dog()
+const myCat = new Cat()
+myDog.speak()
+myCat.speak()
+
+
 //5. Composition
+
+//5a) Object composition canWalk, canSwim, and canFly are objects that represent different behaviors.
+//createBird and createFish functions create new objects and combine them with the desired behaviors using Object.assign.
+const canWalk = {
+    walk(){console.log("walking...");} //object
+}
+
+const canFly = {
+    fly(){console.log("flying...");} //object
+}
+
+function createBird (name){           //function
+let bird ={name}
+return Object.assign(bird,canFly, canWalk)
+}
+
+
+
+const duck = createBird("Duck")
+duck.fly()
+duck.walk()
+
+
+//FUNCTIONAL COMPOSITION
+
+
+const canEat =(state)=>({                           //function takes state object and return object
+eat: ()=>{console.log(`${state.name} is eating`)}
+})
+
+const canSleep =(state)=>({
+    sleep: ()=>{console.log(`${state.name} can sleep`);} //function
+})
+
+const createPerson = (name)=>{                          //main function. // define state
+    let state = {name}
+    return Object.assign(state, canEat(state), canSleep(state))
+}
+
+let person = createPerson("john")
+person.eat()
+person.sleep()
+
 //6.  Advanced Topics :mixins, decoration patter
+
+//Mixins provide a way to extend the functionality of a CLASS  or an object without using classical inheritance. 
+//They allow you to combine behaviors from multiple sources into a single object or class.
+
+
+const canRead ={                                               //object
+    read(){console.log(`${this.name} is reading`);}
+}
+const canListen = {                                             //object
+    listen(){console.log(`${this.name} is listening`);}
+}
+class Kid{                                                       //class
+    constructor(name){
+        this.name=name
+    }
+}
+
+Object.assign(Kid.prototype, canRead,canListen)
+const kid1 = new Kid ("tom")
+kid1.read()
+kid1.listen()

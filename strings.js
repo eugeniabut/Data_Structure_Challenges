@@ -12,15 +12,18 @@ return rev
 }
 console.log(reverseStr("hello"));
 
+
+
 //2. Check if palindrome
 
 const checkPalindrome =(str, pal)=>{
-   let rev = ""
-   for(let i =str.length -1; i>= 0; i--)  {
-       rev = rev + str.charAt(i)
-   }
-
-if  (rev === pal) return true
+  
+    let rev = ""
+    for (let i =str.length-1; i>=0; i--){
+        rev = rev + str.charAt(i)
+    }
+   
+  if (pal ===rev){return true}
 }
 console.log(checkPalindrome("hello", "olleh"));
 
@@ -37,54 +40,83 @@ const checkAnogramm = (str, ano)=>{
 }
 
 console.log(checkAnogramm("dddaaa","aaaddd"));
+//3a
+const isAna =(str1, str2)=>{
+
+    let objStr1 = {}
+    let objStr2 ={}
+   
+
+    for (let i=0; i<str1.length; i++){
+        let char = str1[i]
+         objStr1[char]=(objStr1[char] ||0)+1
+      
+    }
+    for (let i=0; i<str2.length; i++){
+        let char = str2[i]
+         objStr2[char]=(objStr2[char] ||0)+1
+      
+    }
+   for (let char in objStr1){
+    if (objStr1[char] !== objStr2[char]){
+        return false
+    }
+   }
+return true
+}
+console.log("3a anagramm");
+console.log(isAna("abcd","bdcl"));
 
 ///4 Find the first non-repeted char
 
 const findNonRep = (str)=>{
 
-    let countChar = {}
-
-    for ( let i=0; i<=str.length; i++){  //count each char
-      const char = str[i]
-      countChar[char] =(countChar[char]||0) +1
+    let countChar ={}
+    for(let i =0; i<str.length; i++){   //first iteration to count occurence of each char
+       let char = str[i]
+ countChar[char] = (countChar[char] || 0)+1
     }
-    for ( let i=0; i<=str.length; i++){  //if char =1  return char
-        const char = str[i]
-        if (countChar[char] ===1){
-            return char
+    for(let i =0; i<str.length; i++){ //second iteration to find first char ===1
+        let char = str[i]
+        if( countChar[char] ===1){
+             return char             //return char
         }
+                      
     }
-
-return null
+ return null
 }
+console.log("first non-repeating:");
 console.log(findNonRep("aaaaabbbbbc"));
 
 ////Count the munber of wowels
 
 const numWowels =(str)=>{
-    let count = 0
-    const wowels = " aoueyi"
-
-    for (let i =0; i< str.length; i++){
-        if (wowels.includes(str[i])){
-            count +=1
-        }
+ let wowels = "aoyieu"
+ let count =0;
+ for (let i=0; i<str.length; i++){
+    if (wowels.includes(str[i])){
+        count++
     }
-    return count
+ }
+ return count
 }
-console.log(numWowels("helloworldgsshsjsuuuu"));
+console.log(numWowels("hey"));
 
 ///Count the number or words
 const countWords = (str)=>{
 
-    let count =0;
-    let arr = str.split(" ")
-    for (let i =0; i<arr.length; i++){
-        count ++
-    }
-    return count
+  let count =0;
+  let words = str.trim().split(/\s+/)
+  for (let i=0; i< words.length; i++){
+    count += 1
+  }
+  return count
 }
-console.log(countWords("Hello World Jupi"));
+// more simple: const count = word.length (no need in loop)
+console.log("count words in string");
+console.log(countWords("Hello World haha Jupi"));
+
+/////////////////
 
 const toTitle = (str) =>{
 
@@ -96,32 +128,26 @@ console.log(toTitle("Abstract"));
 ///7 Find the longest word
 
 const longestWord = (str)=>{
-    let longest = ""
-    const arr = str.split(" ")
-    for (let i =0; i< arr.length; i++){
-        if (arr[i].length > longest.length){
-            longest = arr[i]
-        }
+let longest = ""
+let arr = str.split(" ")
+for (let i = 0; i < arr.length; i++){
+    if( arr[i].length > longest.length){
+      longest = arr[i]
     }
-    return longest
+}
+return longest
 }
 console.log(longestWord("i am here in Niedersachsen"));
 
 //8 check if string contains only digits
 
 const checkDigits = (str)=>{
-let digits = "123456789"
-  for (let i =0; i< str.length;i++){
-   /* if (!isNaN(parseInt(str[i]))){
-        return true
-    }*/
-
-        if(!digits.includes(str[i])){
-            return false
-        }
-        
-  }
-  return true
+for (let i =0; i<str.length; i++){
+    if (isNaN(parseInt(str))){
+        return false
+    }
+}
+return true
 }
 console.log(checkDigits("123"));
 
@@ -130,43 +156,46 @@ console.log(checkDigits("123"));
 
 const countOccurence = (str)=>{
 
-    let occurence = {}
+   let occurence = {}
+   for (let i =0; i<str.length; i++){
+   char = str[i]
+   occurence[char]= (occurence[char] || 0) +1
 
-    for (let i =0; i<str.length; i++)
-{
-     let char =str[i]
-     occurence[char] =(occurence[char]||0) +1
+   }
+   return occurence
 }
-return occurence
-}
+console.log("occurence of characters")
 console.log(countOccurence("abcdefdddjjj"));
+
+
 
 //11 remove duplicates
 
+
 const removeDuplicates = (str)=>{
 
-  setWithoutDuplicates = new Set(str)
-  let result = Array.from(setWithoutDuplicates).join("")
-  return result
+const withoutDuplicates = new Set(str)
+res = Array.from(withoutDuplicates).join(" ")
+return res
 }
 console.log(removeDuplicates("abbbbcdefg"));
 
-// check if string is a substring of another string
 
-const checkstr = (str, anotherStr)=>{
-for (let i = 0; i< str.length; i ++){
-    if(anotherStr.includes(str))
-        return true
+// 12 check if string is a substring of another string
+
+const checkstr = (str1, str2)=>{
+
+if(str2.includes(str1))
+ return true
+
 }
-return false
-  
-}
-console.log(checkstr("123488", "123456789"));
+console.log("string is a substring");
+console.log(checkstr("123", "123456789"));
 
 //remove all white spaces
 
 const removeWhitespaces = (str)=>{
-let result = str.replace(" ", "")
+let result = str.replace(/\s+/, "")
 return result
 }
 console.log(removeWhitespaces("1234   567   "));
@@ -225,17 +254,22 @@ console.log(toSnakeCase("Hello World"));
 //21 check if all characters are uniqie
 
 const checkUnique = (str)=>{
-
-    let count ={}
-   
-   for (let i =0; i<str.length; i++){
-    let char =str[i]
-    if(count[char]) return false
-    else count[char] =1
+  let obj ={}
+  
+   for (let i=0; i<str.length; i++){
+    let char = str[i]
+   if(obj[char]){  // If the character already exists in the object, it's not unique
+    return false
+    }
+     obj[char] =1 //mark the character as seen 
    }
+  
    return true
 }
-console.log(checkUnique("abcde"));
+console.log("check unique");
+console.log(checkUnique("abcdedd"));
+
+
 
 //REturn array of string into arry object
 
@@ -246,6 +280,8 @@ const transfotm = (arr)=>{
     return transformed
 }
 console.log(transfotm(["mary", "sam","kim"]));
+
+
 
 ///Manipulate arrays
 
@@ -274,20 +310,7 @@ values.push(value)
 console.log(getKeysAndValues(person));
 
 
-// calculet number of wowels 
 
-const calculateNumOfWowels = (str) =>{
-let wowels ="aoueyi"
-let num = 0
-
-for (let i=0; i< str.length; i++){
-    if (wowels.includes(str[i])){
-        num +=1
-    }
-}
-return num
-}
-console.log(calculateNumOfWowels("hello"));
 
 // find non-matching characters in string
 
@@ -390,37 +413,6 @@ const countCharacters = (str)=>{
 }
 console.log(countCharacters("hello word"));
 
-//reverse string 
 
-const revStr =(str)=>{
-let reversed =""
-    for(let i=str.length; i>=0; i--){
-             reversed += str.charAt(i)
-    }
-   return reversed
-}
 
-console.log(revStr("abc"));
 
-const anagram1 = (str1,str2) =>{
-if(str1.length !== str2.length ){return false}
-
-let charactersStr1 ={}
-let charactersStr2 ={}
-
-for (let i=0; i<str1.length; i++){
-    char = str1[i]
-    charactersStr1[char] = (charactersStr1[char]||0 )+1
-}
-
-for (let j=0; j<str1.length; j++){
-    char = str2[j]
-    charactersStr2[char] = (charactersStr2[char]||0 )+1
-}
-
-if ( charactersStr1[char] !==  charactersStr2[char]){return false}
-
-return true
-
-}
-console.log(anagram1( "abdc","acd"));
