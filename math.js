@@ -172,7 +172,7 @@ const findAllPairs = (arr, sum) => {
 console.log(findAllPairs([1, 2, 3, 4, 5, 6], 10));
 
 // 11. calculate a raised to the power of b (a^b) using recursion or iteration.
-                 //iteration
+//iteration
 const raisedToThePower = (a, b) => {
   let result = 1;
   for (let i = 0; i < b; i++) {
@@ -182,76 +182,205 @@ const raisedToThePower = (a, b) => {
 };
 console.log("Power calculation", raisedToThePower(2, 4));
 
-                  //recursion
+//recursion
 const raisedToThepower2 = (a, b) => {
-if(b===0) return 1 //base case for recursion algorithms . it is a condition where recursion must  stop
+  if (b === 0) return 1; //base case for recursion algorithms . it is a condition where recursion must  stop
   return a * raisedToThepower2(a, b - 1);
 };
 console.log("Power calculation recursion", raisedToThepower2(2, 4));
 
-
 // 12. Check Perfect Square: Write a function to check if a given number is a perfect square.
 
-const isPerfectSquare = (n)=>{
-  if(n<0) return false
-let sqrt = Math.sqrt(n)
-return Number.isInteger(sqrt)
-}
-console.log("Perfect square",isPerfectSquare(28));
+const isPerfectSquare = (n) => {
+  if (n < 0) return false;
+  let sqrt = Math.sqrt(n);
+  return Number.isInteger(sqrt);
+};
+console.log("Perfect square", isPerfectSquare(28));
 
-const isPerfectSquare2 =(n)=>{
-  if(n<1)return false
-  for (let i =1; i<=Math.sqrt(n); i++ )
-    if( i*i ===n ){
-      return true
+const isPerfectSquare2 = (n) => {
+  if (n < 1) return false;
+  for (let i = 1; i <= Math.sqrt(n); i++)
+    if (i * i === n) {
+      return true;
     }
-}
+};
 console.log(isPerfectSquare2(36));
-
-
 
 // 13 Sum of First n Natural Numbers: // if(n<1)return 0; sum = n*(n+1)/2
 
-
-const sumOfFirstNum = (n)=>{
-let sum =0
-  for (let i=1; i<=n;i++){
-    sum +=i
+const sumOfFirstNum = (n) => {
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+    sum += i;
   }
-  return sum
-}
+  return sum;
+};
 console.log(sumOfFirstNum(3));
 
+// 14.Binary to Decimal Conversion
+// 1011 => from the end| 1*2^0  + 1*2^1 +  0*2^2 + 1*2^3
 
-// 14.Binary to Decimal Conversion   
+const binaryToDecimal = (binary) => {
+  let decimal = 0;
+  let power = 0;
 
-const binaryToDecimal = ()=>{
+  for (let i = binary.length - 1; i >= 0; i--) {
+    decimal += parseInt(binary[i]) * Math.pow(2, power);
+    power++;
+  }
+  return decimal;
+};
+console.log("decimal", binaryToDecimal("1011"));
 
-}
-console.log(binaryToDecimal(1011));
 {
-  /*
+  // 15. Find Nth Prime Number: Implement a function to find the Nth prime number.
+
+  const findNthPrimeNumber = (limit) => {
+    const sieve = new Array(limit + 1).fill(true);
+
+    sieve[0] = sieve[1] = false;
+    for (let i = 2; i <= limit + 1; i++) {
+      if (sieve[i]) {
+        for (let j = i * i; j <= limit; j += i) {
+          sieve[j] = false;
+        }
+      }
+    }
+    let primes = [];
+    for (let i = 2; i <= limit; i++) {
+      if (sieve[i]) {
+        primes.push(i);
+      }
+    }
+    return primes;
+  };
+
+  console.log(findNthPrimeNumber(100));
+
+  const showNthNum = (n, limit) => {
+    if (n < 2 || n > limit.length) return false;
+
+    const primes = findNthPrimeNumber(limit);
+
+    return primes[n - 1];
+  };
+
+  console.log(showNthNum(5, 100));
+
+  // 16. Check Armstrong Number (where the sum of its own digits each raised to the power of the number of digits
+  //is equal to the number itself).// 1^3+5^3+3^3=1+125+27=153.
+
+  const isArmstrong = (number) => {
+    let digits = number.toString();
+    let n = digits.length;
+    let sumOfPower = 0;
+
+    for (let digit of digits) {
+      sumOfPower += Math.pow(parseInt(digit), n);
+    }
+
+    return sumOfPower === number;
+  };
+  console.log(isArmstrong(153));
+
+
+// 17. Calculate Area of circle, rectangle, triangle
+
+const areaCircle = (radius)=>{
+  const result = (Math.PI*Math.pow(radius,2)).toFixed(2)
+  return result
+}
+console.log(areaCircle(4));
+
+const areaSquare = (a,b)=>{
+  const result = a*b
+  return result
+}
+console.log(areaSquare(4,6));
+
+
+const areaTriangle = (base,heigth)=>{
+
+  const result = 0.5*base*heigth
+  return result
+}
+console.log(areaTriangle(4,6))
 
 
 
 
-Decimal to Binary Conversion: Write a function to convert a decimal number to its binary equivalent.
 
-Find Nth Prime Number: Implement a function to find the Nth prime number.
+// 18. Calculate Factorial of Large Numbers (BigInt)
 
-Check Armstrong Number: Write a function to check if a number is an Armstrong number (where the sum of its own digits each raised to the power of the number of digits is equal to the number itself).
+const factorialBigInt = (n)=>{
 
-Calculate Area of Shapes: Implement functions to calculate the area of different shapes such as circle, rectangle, triangle, etc.
+  if (n<1) return undefined
+  if(n==0 || n===1) return 1n
+  let fact = 1n
+  for (let i=2n; i<=n; i++){
+    fact *= i
+  }
+return fact
+}
+console.log(factorialBigInt(6n));
 
-Check Palindrome Number: Write a function to check if a number is a palindrome (reads the same backward as forward).
 
-Calculate Factorial of Large Numbers: Extend your factorial function to handle very large numbers that exceed typical data type limits.
+// 19. Fibonacci with Memoization
 
-Fibonacci with Memoization: Implement the Fibonacci sequence using memoization to optimize performance.
+const fibonacciMemo =(()=>{
+
+  let memo = {};
+
+  const fibo = (n)=>{
+if ( n<=0) return 0;
+if (n===1) return 1
+
+if (memo[n] !== undefined){
+    return memo[n]              //if memo contains memo[n], return it
+}
+memo[n] = fibo(n-1)+fibo(n-2)
+     return memo[n]             //if does not contain, create it
+  }
+return fibo                     //returns fibo
+}) ()                          //IEFE
+console.log("fibonacci memo",fibonacciMemo(7));
+
+
+
+const fibon =(n)=>{
+  if(n<=0)return 0
+  if(n===1)return 1
+
+  const res = fibon(n-1)+ fibon(n-2)
+  return res
+}
+console.log("fibonacci recursive",fibon(7));
+
+const fiboImplem = (n)=>{
+  
+  if( n<=0) return 0
+  if (n===1) return 1
+
+  let fibo = [0,1]
+
+  for( let i =2; i<=n; i++){
+    fibo[i] = fibo[i-1] +fibo[i-2]
+     
+  }
+  
+return fibo[n]
+}
+
+console.log("fibonacci loop implementation",fiboImplem(7));
+/*
 
 Check Prime Numbers in a Range: Write a function to find and print all prime numbers less than or equal to a given number n.
 
-Check if Two Numbers are Amicable: Implement a function to check if two numbers are amicable (where each number is the sum of the proper divisors of the other).
+Check if Two Numbers are Amicable: Implement a function to check if two numbers are amicable 
+//(where each number is the sum of the proper divisors of the other).
+
+
 
 Check Happy Number: Write a function to check if a number is a happy number (where repeatedly replacing a number by the sum of the squares of its digits eventually reaches 1).*/
 }
