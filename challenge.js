@@ -1,4 +1,4 @@
-{
+
   const getMinMax = function (arr) {
   const min = Math.min(...arr);
   const max = Math.max(...arr);
@@ -288,7 +288,7 @@ for (let entr of foodEntries ){
 }
 
 console.log( Array.isArray(array9)? "true":"false");*/
-}
+/*
 
 const ar = ["strowberry"];
 const array = ["apple", "banana", "potato", "kiwi"];
@@ -1217,4 +1217,5 @@ for( let i =str.length-1; i >= 0; i--){
 return rev
 }
 console.log(reverceString("hello"));
+
 

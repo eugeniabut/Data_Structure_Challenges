@@ -1,40 +1,7 @@
 //************************************************************************* */
 
-/////Static Methods and Properties
 
-class Person {
-static totalPersons = 0 //static property
-
-    constructor (name, age){
-        this.name = name; 
-        this.age = age;    
-        Person.totalPersons++  //accessing class static property Coun immediately when person is created
-    }
-    isAdult(){
-        if(this.age > 18) return true 
-    }
-    static countPersons (){
-        return Person.totalPersons // class-level method
-    }
-    static countAges (persons){
-        let sum =0
-        persons.forEach(person =>{  sum += person.age}
-      );
-        return sum
-    }
-}
-const person1 = new Person ("sam",19)
-const person2 = new Person ("sara",29)
-const persons = [person1, person2];
-
-console.log(person1.isAdult());
-
-
-console.log(Person.countPersons()); // 2
-console.log(Person.countAges(persons)); // 2
-
-console.log("*****************************");
-//****************************************** */
+/*
 class Node{
     constructor( data,next =null){
         this.data = data;
@@ -168,62 +135,49 @@ console.log(ll);
 
 //*********************************************************************** */
 //CLASSES
-//Create a class Employee with properties like name, position, and salary.
+//1. Create a class Employee with properties like name, position, and salary.
 // Add methods to increaseSalary and describeEmployee.
-
-class Employee {
-    constructor(name,position,salary){
-        this.name=name;
-        this.position=position;
-        this.salary = salary
-    }
-    increasedSalary(percentage){
-      const increasedSalary =this.salary + (this.salary/100*percentage)
-     console.log(`Salary after ${percentage} % increase:$ ${increasedSalary.toFixed(2)} `); 
-    }
-
-    describeEmployee(){
-     console.log(`Employee: ${this.name}, ${this.position}, ${this.salary}`);
-    }
-}
-
 
 
 //Extend the Employee class to create a Manager class.
 // Add a method to add or remove employees under the manager.
 
-class Manager extends Employee{
-    constructor(name,position,salary){
-        super(name,position,salary)
-        this.employees =[]
+// 2. Static Methods and Properties
+
+class Person {
+    static totalPersons = 0 //static property
+    
+        constructor (name, age){
+            this.name = name; 
+            this.age = age;    
+            Person.totalPersons++  //accessing class static property Coun immediately when person is created
+        }
+        isAdult(){
+            if(this.age > 18) return true 
+        }
+        static countPersons (){
+            return Person.totalPersons // class-level method
+        }
+        static countAges (persons){
+            let sum =0
+            persons.forEach(person =>{  sum += person.age}
+          );
+            return sum
+        }
     }
-  
-   addEmployee(employee){
-   this.employees.push(employee)
-    console.log(`${employee.name} added`);
-   }
+    const person1 = new Person ("sam",19)
+    const person2 = new Person ("sara",29)
+    const persons = [person1, person2];
+    
+    console.log(person1.isAdult());
+    
+    
+    console.log(Person.countPersons()); // 2
+    console.log(Person.countAges(persons)); // 2
+    
+    console.log("*****************************");
 
-   removeEmployee(employee){
-    this.employees = this.employees.filter((emp)=>emp!== employee)
-    console.log(`${employee.name} is removed`);
-   }
-   displayEmployees(){
-  this.employees.forEach((emp)=>emp.describeEmployee())
-
-   }
-}
-const employee1 = new Employee("sara", "smith", 1200)
-const employee2 = new Employee("peter", "pen", 1200)
-const employee3 = new Employee("rosa", "bella", 1200)
-
-const manager = new Manager ("Kim", "Belington",3000)
-
-manager.addEmployee(employee1)
-manager.addEmployee(employee2)
-manager.addEmployee(employee3)
-manager.removeEmployee(employee2)
-manager.displayEmployees()
-
+    //****************************************** */
 
 
 /// 2. Encapsulation: private fields #; getters, setters
@@ -238,7 +192,7 @@ class Student {
    
 
     getNote(){
-        console.log(this.#note); 
+        console.log(`get note: ${this.#note}` ); 
     }
     
     setNote(newNote){
@@ -249,9 +203,10 @@ class Student {
     }
 }
 const student1 = new Student("John", "1a", 3) // console: Student { name: 'John', group: '1a' } note is hidden
-console.log(student1);
-student1.getNote()
-student1.setNote(5)
+
+student1.getNote(5) 
+
+ student1.setNote(5) ; 
 
 /// 3. Polymorphism 
 
@@ -331,7 +286,7 @@ duck.walk()
 
 
 //FUNCTIONAL COMPOSITION
-
+/*
 
 const canEat =(state)=>({                           //function takes state object and return object
 eat: ()=>{console.log(`${state.name} is eating`)}
@@ -354,7 +309,7 @@ person.sleep()
 
 //Mixins provide a way to extend the functionality of a CLASS  or an object without using classical inheritance. 
 //They allow you to combine behaviors from multiple sources into a single object or class.
-
+/*
 
 const canRead ={                                               //object
     read(){console.log(`${this.name} is reading`);}
@@ -372,3 +327,86 @@ Object.assign(Kid.prototype, canRead,canListen)
 const kid1 = new Kid ("tom")
 kid1.read()
 kid1.listen()
+
+*/
+
+class Employee{
+    constructor( name, position, salary){
+        this.name = name;
+        this.position = position;
+        this.salary  =salary;
+    }
+
+    increaseSalary(){
+        const newSalary = this.salary *1.2
+        return `Old Salary: ${this.salary}; New salary: ${newSalary} `
+    }
+
+    displayempoyee(){
+        return`Employee: ${this.name}, ${this.position}`
+    }
+}
+
+const employee1 = new Employee("Sara","Developer",2000)
+
+console.log(employee1.increaseSalary());
+console.log(employee1.displayempoyee());
+
+class Developer extends Employee{
+    #birthday                       //private property
+    static totalDevelopers =0           //static property
+    constructor(name, position, salary,birthday){
+        super(name,position, salary)
+        this.#birthday =birthday
+        this.ListOfDevelopers = []
+        Developer.totalDevelopers ++
+    }
+countDevelopers(){
+    return Developer.totalDevelopers   //method returns atatic property
+}
+
+getBirthday(dev){
+    console.log(`birthday of ${this.name} is on ${this.#birthday}`); // use getter to get private property
+}
+setBirthday(newBirthday){                                            // use setter to change private property
+    if( newBirthday>0){
+        this.#birthday=newBirthday
+    }
+}
+
+    addDeveloper(dev){
+        this.ListOfDevelopers.push(dev)
+    }
+    removeDeveloper(dev){
+        this.ListOfDevelopers= this.ListOfDevelopers.filter((item)=>item !== dev )
+    }
+    displayDevelopers(){
+              const list =  this.ListOfDevelopers.map((dev,index)=> `${index +1} ${dev.displayempoyee()}`) .join("\n")
+              return list
+    }
+    countSalaries(){
+        
+      return this.ListOfDevelopers.reduce((total,current)=>total+current.salary,0)
+     
+    }
+    sortDevelopers(){
+        return this.ListOfDevelopers.sort((a,b)=>a.salary-b.salary)
+    }
+}
+const developer1 = new Developer("Kim", "developer", 5000, 1976)
+const developer2 = new Developer("Peter", "developer", 1900, 1999)
+const developer3 = new Developer("Alex", "developer", 3000, 2000)
+
+
+const mainDeveloper = new Developer("lead", "developer", 3000,1989)
+//mainDeveloper.addDeveloper(mainDeveloper)
+mainDeveloper.addDeveloper(developer1)
+mainDeveloper.addDeveloper(developer2)
+mainDeveloper. addDeveloper(developer3)
+
+
+
+
+console.log(mainDeveloper.displayDevelopers());
+mainDeveloper.setBirthday(2001)
+mainDeveloper.getBirthday();

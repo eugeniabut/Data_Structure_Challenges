@@ -9,7 +9,7 @@
 // 9.Find least common multiple of two numbers (the smallest number that can be devided by both numbers a and b)
 //
 //******************************************************************************************************** */
-//1 fibonacci sequence
+//1 fibonacci sequence [0,1,1,3,5,]
 
 const fibonacci = (n) => {
   if (n < 0) return false;
@@ -31,15 +31,15 @@ console.log("fibonacci sequence", fibonacci(7));
 const fiboNum = (n) => {
   if (n < 0) return false;
   if (n === 0) return 0;
-  if (n === 1) return1;
+  if (n === 1) return 1;
 
   let prevPrev = 0;
   let prev = 1;
   let current = 1;
 
   for (let i = 2; i <= n; i++) {
-    current = prev + prevPrev;
-    prevPrev = prev; //update prevPrev first!
+    current = prev + prevPrev; 
+    prevPrev = prev; 
     prev = current;
   }
 
@@ -269,7 +269,7 @@ console.log("decimal", binaryToDecimal("1011"));
   console.log(showNthNum(5, 100));
 
   // 16. Check Armstrong Number (where the sum of its own digits each raised to the power of the number of digits
-  //is equal to the number itself).// 1^3+5^3+3^3=1+125+27=153.
+  //is equal to the number itself).//153 =>  1^3+5^3+3^3=1+125+27 = 153.
 
   const isArmstrong = (number) => {
     let digits = number.toString();
@@ -308,9 +308,6 @@ const areaTriangle = (base,heigth)=>{
 console.log(areaTriangle(4,6))
 
 
-
-
-
 // 18. Calculate Factorial of Large Numbers (BigInt)
 
 const factorialBigInt = (n)=>{
@@ -346,8 +343,9 @@ return fibo                     //returns fibo
 }) ()                          //IEFE
 console.log("fibonacci memo",fibonacciMemo(7));
 
+}
 
-
+//**
 const fibon =(n)=>{
   if(n<=0)return 0
   if(n===1)return 1
@@ -356,6 +354,8 @@ const fibon =(n)=>{
   return res
 }
 console.log("fibonacci recursive",fibon(7));
+
+//** 
 
 const fiboImplem = (n)=>{
   
@@ -373,14 +373,75 @@ return fibo[n]
 }
 
 console.log("fibonacci loop implementation",fiboImplem(7));
-/*
-
-Check Prime Numbers in a Range: Write a function to find and print all prime numbers less than or equal to a given number n.
-
-Check if Two Numbers are Amicable: Implement a function to check if two numbers are amicable 
-//(where each number is the sum of the proper divisors of the other).
 
 
+// 20. Check Prime Numbers in a Range: Write a function to find and print
+//all prime numbers less than or equal to a given number n.
 
-Check Happy Number: Write a function to check if a number is a happy number (where repeatedly replacing a number by the sum of the squares of its digits eventually reaches 1).*/
+const primeNumRange =(n)=>{
+if (n<=1) return false
+
+ let arr = []
+
+for (let i = 2; i<=n; i++){
+let isPrime =true
+for(let j =2; j<= Math.sqrt(i);j++){
+  if(i%j === 0){
+    isPrime = false
+    break
+  }
 }
+if( isPrime){
+arr.push(i)
+}
+
+  }
+return arr
+}
+console.log("prime numbers in a range:",primeNumRange(65));
+
+// 21. Check if number is a happy number A happy number is a number which eventually reaches 1 when 
+//replaced by the sum of the square of each digit. This process is repeated over and over until 
+//the number reaches 1 (where it will stay), or it loops endlessly in a cycle 
+//let check 19
+//1^2 +9^2 =82;  8^2 + 2^2 =68;  6^2 + 8^2=100 ; 1^2+0^2+0^2 =1  (reach 1)    thus, 19 is happy! 
+
+const isHappyNumber =(num)=>{
+
+const sumOfDigitsSquares = (n)=>{
+
+  let sum =0;
+ 
+  while(n> 0){
+    let digit = n%10
+    sum+= digit*digit
+    n= Math.floor(n/10)
+  }
+  return sum
+}
+let slow =num;
+let fast = sumOfDigitsSquares(num)
+
+while(fast !== 1 && slow !== fast){
+  slow = sumOfDigitsSquares(slow)
+  fast = sumOfDigitsSquares(sumOfDigitsSquares(fast))
+}
+return fast===1
+}
+console.log(isHappyNumber(19));
+
+
+//22. Perfect Number
+//perfect number is a positive integer that is equal to the sum of its proper divisors 
+//(excluding the number itself). For example 28 = 1+2+4+7+14
+
+const isPerfect = (num)=>{
+  let sum =0
+  for(let i =0; i<=num/2; i++){
+    if (num%i===0){
+    sum += i
+    }
+  }
+return sum===num && num !==0
+}
+console.log("is perfect number", isPerfect(29));
