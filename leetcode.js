@@ -260,18 +260,17 @@ console.log(moveZeroes([0,1,0,3,12]));
 var majorityElement = function(nums) {
     
     let count ={}
-    for (let i=0;i<nums.length;i++){
-    
 
-        if(nums[i]){
+    for (let i=0;i<nums.length;i++){
             let char = nums[i]
-          count[char]= (count[char] ||0) +1
+             count[char]= (count[char] ||0) +1
         }
       
-    }
- let major = 0
+ 
+    let major = nums[0] //first under index 0
     for (let char in count){    //iteration in object: in
-        if (count[char] > major){
+      
+        if (count[char] > count[major]){
             major = char        //never return inside a loop -> will stop loop immediately
           
         }
@@ -279,3 +278,64 @@ var majorityElement = function(nums) {
     return major
 };
 console.log( majorityElement([2,2,1,1,1,2,2]));
+
+
+//*************************************************** */
+
+// 11. Write a function to find the longest common prefix string amongst an array of strings.
+//If there is no common prefix, return an empty string "".
+//Input: strs = ["flower","flow","flight"]
+//Input: strs = ["flower","flow","flight"] Output: "fl"
+
+const findLongestCommonPrefix =(strs)=>{
+
+let prefix = strs[0]
+for(let i =1; i<strs.length; i++){
+while(strs[i].indexOf(prefix) !==0){
+    prefix =prefix.substring(0, prefix.length-1)
+    if(prefix===""){return ""}
+}
+
+}
+return prefix
+}
+console.log(findLongestCommonPrefix(["flower","flow","flight"]));
+
+//************************************************************************************************** */
+// 12. Rotate array 
+//Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+//Input: nums = [-1,-100,3,99], k = 2
+//Output: [3,99,-1,-100]
+//Explanation: 
+//rotate 1 steps to the right: [99,-1,-100,3]
+//rotate 2 steps to the right: [3,99,-1,-100]
+
+const rotateArNums = (nums,k)=>{
+
+let n = nums.length 
+k = k%n    //Handle cases where k is greater than n
+
+reverse(nums,0,n-1 )
+reverse(nums,0,k-1)
+reverse(nums,k,n-1)
+    
+return nums
+
+
+}
+const reverse = (arr,start,end)=>{
+        while(start < end){
+            let temp = arr[start]
+        arr[start] =arr[end]
+        arr[end] =temp  
+        start++
+        end--
+        }
+      
+
+
+    }
+
+console.log(rotateArNums([-1,0,1,2],2));
+
+///Another way: return nums.slice(-k).concat(nums.slice(0, -k));
