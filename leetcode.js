@@ -187,23 +187,23 @@ console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
 
 const removeDuplicatesII =(nums)=>{
 
-    let i =1
+    let i =1 //slow pointer indicates the position
     let count =1  
     
     for (let j =1; j<nums.length;j++){
-      if (nums[j] ===nums[i]){
+      if (nums[j] ===nums[i]){ //If the current element is the same as the previous one, increment the count
           count++
       }
       else{
-          count =1 //we recet cout to 1 to be ready for the next repeating digits
+          count =1 // If the current element is different, reset the count to 1
       }
         if(count <=2){
-      nums[i] = nums[j]
-      i++
+      nums[i] = nums[j]   // Place the current element at the position indicated by `i`
+      i++                 // Move the slow pointer to the next position
     }
     }
   
-  return i
+  return i+1 //Return the length of the modified array
   }
   console.log(removeDuplicatesII([1,1,1,2,2,3,7,7]));
 
@@ -242,13 +242,13 @@ console.log(applyOperations(nums));
 
 var moveZeroes = function (nums) {
   let k = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] !== 0) {
+  for (let i = 0; i < nums.length; i++) { 
+    if (nums[i] !== 0) {           // array with non-zero numbers
       nums[k] = nums[i];
       k++;
     }
   }
-  for (let i = k; i < nums.length; i++) {
+  for (let i = k; i < nums.length; i++) {  //all zeroes at the end
     nums[i] = 0;
   }
 
@@ -366,6 +366,7 @@ const reverseArr3 =(nums,k)=>{
 console.log(reverseArr3([-1, 0, 1, 2],2));
 
 // FIND PROFIT
+//Best Time to Buy and Sell Stock I
 
 var maxProfit = function(prices) {
     let minPrice =prices[0];
@@ -386,4 +387,39 @@ var maxProfit = function(prices) {
 };
 console.log(maxProfit([7,1,5,3,6,4]))
 
+// Best Time to Buy and Sell Stock II. !!!On each day, you may decide to buy and/or sell the stock.
+//Input: prices = [7,1,5,3,6,4]  Output: 7
+//Explanation: Buy on day 2 (price = 1) and sell on day 3 (price = 5), profit = 5-1 = 4.
+//Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
+//Total profit is 4 + 3 = 7.
 
+const maxProfit2 =(prices)=>{
+
+let maxProfit =0;
+
+for (let i =0; i<prices.length; i++){
+  if (prices[i]> prices[i-1]){
+    maxProfit += (prices[i]-prices[i-1])
+  }
+}
+return maxProfit
+}
+
+console.log(maxProfit2([7,1,5,3,6,4]));
+
+//Jump Game
+//You are given an integer array nums. You are initially positioned at the array's first
+// index, and each element in the array represents your maximum jump length at that position.
+//Return true if you can reach the last index, or false otherwise.
+
+const jump = (nums)=>{
+ let maxReach =0 // max index we can reach
+ for(let i =0; i< nums.length; i++){
+if (i > maxReach){return false}
+
+maxReach = Math.max(maxReach, i+nums[i]) //Math.max is needed to check reachibality globally
+
+ }
+ return maxReach >= nums.length-1
+}
+console.log(jump([2,3,1,1,4]));
