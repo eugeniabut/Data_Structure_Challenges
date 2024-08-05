@@ -414,6 +414,7 @@ console.log(maxProfit2([7,1,5,3,6,4]));
 
 const jump = (nums)=>{
  let maxReach =0 // max index we can reach
+
  for(let i =0; i< nums.length; i++){
 if (i > maxReach){return false}
 
@@ -423,3 +424,60 @@ maxReach = Math.max(maxReach, i+nums[i]) //Math.max is needed to check reachibal
  return maxReach >= nums.length-1
 }
 console.log(jump([2,3,1,1,4]));
+
+// Jump Game . Each element nums[i] represents the maximum length of a forward jump from index i.
+//Return the minimum number of jumps to reach nums[n - 1]
+
+var jumps = function(nums) {
+ let jump =0
+ let maxRange = 0  //farthest index
+ let currentEnd =0
+
+ for(let i=0; i<nums.length-1; i++){
+   maxRange = Math.max(maxRange, i+nums[i]) 
+    if (i === currentEnd){
+     currentEnd =maxRange
+      jump++
+    }
+    if (currentEnd >= nums.length -1){break}
+
+  }
+      return jump
+ }
+ console.log(jumps([2,3,1,1,4]));
+
+
+ //Length of the last word
+ const lengthTheLastWord =(str)=>{
+  
+  const arr =str.split(" ")
+  return arr[arr.length -1].length
+ }
+ console.log(lengthTheLastWord("Hello World"));
+
+ var lengthOfLastWord = function(s) {
+  let length = 0; // To count the length of the last word
+  let inWord = false; // To track if we are in a word
+  
+  // Iterate from the end of the string to the beginning
+  for (let i = s.length - 1; i >= 0; i--) {
+      if (s[i] !== ' ') {
+          // If it's a non-space character, we are in a word
+          inWord = true;
+          length++;
+      } else if (inWord) {
+          // If we encounter a space after being in a word, stop counting
+          break;
+      }
+  }
+  
+  return length;
+};
+
+// Test the function
+console.log(lengthOfLastWord("Hello World")); // Output: 5
+console.log(lengthOfLastWord("   Leading and trailing spaces   ")); // Output: 7 ("spaces" is the last word)
+console.log(lengthOfLastWord("SingleWord")); // Output: 10 ("SingleWord" is the last word)
+console.log(lengthOfLastWord(" ")); // Output: 0 (Empty string or just spaces)
+
+
