@@ -171,7 +171,7 @@ console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
 const removeDuplicates = function (nums) {
   let i = 0; //slow pointer indicates the position
 
-  for (let j = 1; j < nums.length; j++) { 
+  for (let j = 1; j < nums.length; j++) {
     if (nums[j] !== nums[i]) {
       i++; //move pointer
       nums[i] = nums[j];
@@ -181,32 +181,28 @@ const removeDuplicates = function (nums) {
 };
 console.log(removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]));
 
-
 //REMOVE DUPLICATES II . Leave all integers that occur once or twice
 
+const removeDuplicatesII = (nums) => {
+  let i = 1; //slow pointer indicates the position
+  let count = 1;
 
-const removeDuplicatesII =(nums)=>{
-
-    let i =1 //slow pointer indicates the position
-    let count =1  
-    
-    for (let j =1; j<nums.length;j++){
-      if (nums[j] ===nums[i]){ //If the current element is the same as the previous one, increment the count
-          count++
-      }
-      else{
-          count =1 // If the current element is different, reset the count to 1
-      }
-        if(count <=2){
-      nums[i] = nums[j]   // Place the current element at the position indicated by `i`
-      i++                 // Move the slow pointer to the next position
+  for (let j = 1; j < nums.length; j++) {
+    if (nums[j] === nums[i]) {
+      //If the current element is the same as the previous one, increment the count
+      count++;
+    } else {
+      count = 1; // If the current element is different, reset the count to 1
     }
+    if (count <= 2) {
+      nums[i] = nums[j]; // Place the current element at the position indicated by `i`
+      i++; // Move the slow pointer to the next position
     }
-  
-  return i+1 //Return the length of the modified array
   }
-  console.log(removeDuplicatesII([1,1,1,2,2,3,7,7]));
 
+  return i + 1; //Return the length of the modified array
+};
+console.log(removeDuplicatesII([1, 1, 1, 2, 2, 3, 7, 7]));
 
 // 08 Apply Operations to an Array
 //if nums[i] == nums[i + 1], then multiply nums[i] by 2 and set nums[i + 1] to 0. Otherwise, you skip this operation.
@@ -242,13 +238,15 @@ console.log(applyOperations(nums));
 
 var moveZeroes = function (nums) {
   let k = 0;
-  for (let i = 0; i < nums.length; i++) { 
-    if (nums[i] !== 0) {           // array with non-zero numbers
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      // array with non-zero numbers
       nums[k] = nums[i];
       k++;
     }
   }
-  for (let i = k; i < nums.length; i++) {  //all zeroes at the end
+  for (let i = k; i < nums.length; i++) {
+    //all zeroes at the end
     nums[i] = 0;
   }
 
@@ -288,7 +286,8 @@ console.log(majorityElement([2, 2, 1, 1, 1, 2, 2]));
 const findLongestCommonPrefix = (strs) => {
   let prefix = strs[0];
   for (let i = 1; i < strs.length; i++) {
-    while (strs[i].indexOf(prefix) !== 0) { // indexOf() is <1 (negative) if does not exist, 0 means starts from 0 position
+    while (strs[i].indexOf(prefix) !== 0) {
+      // indexOf() is <1 (negative) if does not exist, 0 means starts from 0 position
       prefix = prefix.substring(0, prefix.length - 1); //we shorten prefix from the end
       if (prefix === "") {
         return "";
@@ -312,9 +311,9 @@ const rotateArNums = (nums, k) => {
   let n = nums.length;
   k = k % n; //Handle cases where k is greater than n
 
-  reverse(nums, 0, n - 1);//reverse entite array
-  reverse(nums, 0, k - 1);//reverse first k elements
-  reverse(nums, k, n - 1);//reverse remaining elements
+  reverse(nums, 0, n - 1); //reverse entite array
+  reverse(nums, 0, k - 1); //reverse first k elements
+  reverse(nums, k, n - 1); //reverse remaining elements
 
   return nums;
 };
@@ -332,60 +331,58 @@ console.log(rotateArNums([-1, 0, 1, 2], 2));
 
 ///Another way: return nums.slice(-k).concat(nums.slice(0, -k));
 
-const reverseArr = (nums)=>{
-let start = 0
-let end = nums.length -1
+const reverseArr = (nums) => {
+  let start = 0;
+  let end = nums.length - 1;
 
-while(start < end){
-let temp = nums[start]
-nums[start] = nums[end]
-nums[end] = temp
-start++
-end--
-}
-return nums
-}
+  while (start < end) {
+    let temp = nums[start];
+    nums[start] = nums[end];
+    nums[end] = temp;
+    start++;
+    end--;
+  }
+  return nums;
+};
 console.log(reverseArr([-1, 0, 1, 2]));
 //----------------------------
-const reverseArr2 =(arr)=>{
-
-    let result = []
-    for(let i= arr.length-1; i>=0; i--){
-        result.push(arr[i])
-    }
-    return result
-}
+const reverseArr2 = (arr) => {
+  let result = [];
+  for (let i = arr.length - 1; i >= 0; i--) {
+    result.push(arr[i]);
+  }
+  return result;
+};
 
 console.log(reverseArr2([-1, 0, 1, 2]));
 
 //-----------------------------------
 
-const reverseArr3 =(nums,k)=>{
- return nums.slice(-k).concat(nums.slice(0,-k))
-}
-console.log(reverseArr3([-1, 0, 1, 2],2));
+const reverseArr3 = (nums, k) => {
+  return nums.slice(-k).concat(nums.slice(0, -k));
+};
+console.log(reverseArr3([-1, 0, 1, 2], 2));
 
 // FIND PROFIT
 //Best Time to Buy and Sell Stock I
 
-var maxProfit = function(prices) {
-    let minPrice =prices[0];
-    let maxProfit = 0;
+var maxProfit = function (prices) {
+  let minPrice = prices[0];
+  let maxProfit = 0;
 
-    for(let i = 1; i <prices.length; i++){
-        if( prices[i] < minPrice){
-            minPrice = prices[i]
-        } else{
-            let potentialProfit = prices[i] - minPrice
-            if(potentialProfit > maxProfit){
-                maxProfit = potentialProfit
-            }
-        }
-   
-    }    
-     return maxProfit
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < minPrice) {
+      minPrice = prices[i];
+    } else {
+      let potentialProfit = prices[i] - minPrice;
+      if (potentialProfit > maxProfit) {
+        maxProfit = potentialProfit;
+      }
+    }
+  }
+  return maxProfit;
 };
-console.log(maxProfit([7,1,5,3,6,4]))
+console.log(maxProfit([7, 1, 5, 3, 6, 4]));
 
 // Best Time to Buy and Sell Stock II. !!!On each day, you may decide to buy and/or sell the stock.
 //Input: prices = [7,1,5,3,6,4]  Output: 7
@@ -393,91 +390,206 @@ console.log(maxProfit([7,1,5,3,6,4]))
 //Then buy on day 4 (price = 3) and sell on day 5 (price = 6), profit = 6-3 = 3.
 //Total profit is 4 + 3 = 7.
 
-const maxProfit2 =(prices)=>{
+const maxProfit2 = (prices) => {
+  let maxProfit = 0;
 
-let maxProfit =0;
-
-for (let i =0; i<prices.length; i++){
-  if (prices[i]> prices[i-1]){
-    maxProfit += (prices[i]-prices[i-1])
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] > prices[i - 1]) {
+      maxProfit += prices[i] - prices[i - 1];
+    }
   }
-}
-return maxProfit
-}
+  return maxProfit;
+};
 
-console.log(maxProfit2([7,1,5,3,6,4]));
+console.log(maxProfit2([7, 1, 5, 3, 6, 4]));
 
 //Jump Game
 //You are given an integer array nums. You are initially positioned at the array's first
 // index, and each element in the array represents your maximum jump length at that position.
 //Return true if you can reach the last index, or false otherwise.
 
-const jump = (nums)=>{
- let maxReach =0 // max index we can reach
+const jump = (nums) => {
+  let maxReach = 0; // max index we can reach
 
- for(let i =0; i< nums.length; i++){
-if (i > maxReach){return false}
+  for (let i = 0; i < nums.length; i++) {
+    if (i > maxReach) {
+      return false;
+    }
 
-maxReach = Math.max(maxReach, i+nums[i]) //Math.max is needed to check reachibality globally
-
- }
- return maxReach >= nums.length-1
-}
-console.log(jump([2,3,1,1,4]));
+    maxReach = Math.max(maxReach, i + nums[i]); //Math.max is needed to check reachibality globally
+  }
+  return maxReach >= nums.length - 1;
+};
+console.log(jump([2, 3, 1, 1, 4]));
 
 // Jump Game . Each element nums[i] represents the maximum length of a forward jump from index i.
 //Return the minimum number of jumps to reach nums[n - 1]
 
-var jumps = function(nums) {
- let jump =0
- let maxRange = 0  //farthest index
- let currentEnd =0
+var jumps = function (nums) {
+  let jump = 0;
+  let maxRange = 0; //farthest index
+  let currentEnd = 0;
 
- for(let i=0; i<nums.length-1; i++){
-   maxRange = Math.max(maxRange, i+nums[i]) 
-    if (i === currentEnd){
-     currentEnd =maxRange
-      jump++
+  for (let i = 0; i < nums.length - 1; i++) {
+    maxRange = Math.max(maxRange, i + nums[i]);
+    if (i === currentEnd) {
+      currentEnd = maxRange;
+      jump++;
     }
-    if (currentEnd >= nums.length -1){break}
-
+    if (currentEnd >= nums.length - 1) {
+      break;
+    }
   }
-      return jump
- }
- console.log(jumps([2,3,1,1,4]));
+  return jump;
+};
+console.log(jumps([2, 3, 1, 1, 4]));
 
+//Length of the last word
+const lengthTheLastWord = (str) => {
+  const arr = str.split(" ");
+  return arr[arr.length - 1].length;
+};
+console.log(lengthTheLastWord("Hello World"));
+//*****/ //Length of the last word
 
- //Length of the last word
- const lengthTheLastWord =(str)=>{
-  
-  const arr =str.split(" ")
-  return arr[arr.length -1].length
- }
- console.log(lengthTheLastWord("Hello World"));
-
- var lengthOfLastWord = function(s) {
+var lengthOfLastWord = function (s) {
   let length = 0; // To count the length of the last word
   let inWord = false; // To track if we are in a word
-  
+
   // Iterate from the end of the string to the beginning
   for (let i = s.length - 1; i >= 0; i--) {
-      if (s[i] !== ' ') {
-          // If it's a non-space character, we are in a word
-          inWord = true;
-          length++;
-      } else if (inWord) {
-          // If we encounter a space after being in a word, stop counting
-          break;
-      }
+    if (s[i] !== " ") {
+      // If it's a non-space character, we are in a word
+      inWord = true;
+      length++;
+    } else if (inWord) {
+      // If we encounter a space after being in a word, stop counting
+      break;
+    }
   }
-  
+
   return length;
 };
-
 // Test the function
-console.log(lengthOfLastWord("Hello World")); // Output: 5
-console.log(lengthOfLastWord("   Leading and trailing spaces   ")); // Output: 7 ("spaces" is the last word)
-console.log(lengthOfLastWord("SingleWord")); // Output: 10 ("SingleWord" is the last word)
-console.log(lengthOfLastWord(" ")); // Output: 0 (Empty string or just spaces)
+console.log("lengthOfLastWord", lengthOfLastWord("Hello World")); // Output: 5
+
+// Valid parenthesis . Given a string s containing  '(', ')', '{', '}', '[' and ']',
+//determine if the input string is valid.
+
+const validParenthesis = (s) => {
+  let open = "(,{,[";
+  let closed = "),},]";
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    if (open.includes(s[i])) {
+      stack.push(s[i]);
+    } else if (closed.includes(s[i])) {
+      if (stack.length !== 0) {
+        let top = stack[stack.length - 1];
+        if (
+          (s[i] === ")" && top === "(") ||
+          (s[i] === "]" && top === "[") ||
+          (s[i] === "}" && top === "{")
+        )
+          stack.pop();
+        else return false // Mismatched parenthesis
+      }
+      else return false // stack was empty
+    }
+    return true
+  }
+};
+console.log(validParenthesis("()[]{}"));
+
+//FIRST OCCURENCE
+// Given two strings needle and haystack, 
+//return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+
+const firstOccurence =(haystack, needle)=>{
+ return haystack.indexOf(needle)
+}
+console.log(firstOccurence("sadbutsad","nut"));
 
 
+//******************************** */
+//Search Insert Position
+//Given a sorted array of distinct integers and a target value, return the index if the target is found. 
+//If not, return the index where it would be if it were inserted in order.
+//You must write an algorithm with O(log n) runtime complexity.
+
+const insertPosition =(nums,target)=>{
+
+  for (let i=0; i<nums.length;i++){
+    if(nums[i]>=target){
+      return i
+    }
+  }
+  return nums.length //will be at the end of the array
+}
+console.log(insertPosition([1,2,3,4,6,7,8],5));
+
+//To achieve O(log n) runtime complexity, you should use a binary search algorithm. 
+
+const insertPos =(nums,target)=>{
+
+  let left =0;
+  let right =nums.length -1
+  
+
+ while(left<right){
+  let middle = Math.floor((left +right)/2)
+
+  if (target = nums[middle]){
+    return middle
+  }
+ else if (target <nums[middle] ){
+    right =middle -1
+  }
+  else {left = middle +1}
+
+ }
+return left  //target not found, return the insertion point
+}
+console.log(insertPos([1,2,3,4,6,7,8],5));
+
+var searchInsert = function(nums, target) {
+  let left = 0;
+  let right = nums.length -1
+
+  while(left <= right){
+      let middle = Math.floor((right + left)/2)
+
+      if (target === nums[middle]){
+          return middle
+      }
+      if (target < nums[middle]){
+          right = middle-1
+      }
+      else{
+          left =middle +1
+      }
+  }
+  return left
+};
+console.log("search insert",searchInsert([1,3,5,6],5)); 
+
+//PLUS ONE
+//You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+//Increment the large integer by one and return the resulting array of digits.
+//Input: digits = [1,2,3] Output: [1,2,4] Explanation: The array represents the integer 123.
+//Incrementing by one gives 123 + 1 = 124.Thus, the result should be [1,2,4].
+
+const plusOne = (digits)=>{
+
+  for(let i= digits.length-1; i>=0; i--){
+    if (digits[i] < 9){
+      digits[i]++
+    
+    }
+    digits[i]=0
+  }
+digits.unshift(1)
+return digits
+}
+console.log(plusOne([1,2,9]));
