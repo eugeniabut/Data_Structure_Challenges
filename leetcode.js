@@ -493,86 +493,79 @@ const validParenthesis = (s) => {
           (s[i] === "}" && top === "{")
         )
           stack.pop();
-        else return false // Mismatched parenthesis
-      }
-      else return false // stack was empty
+        else return false; // Mismatched parenthesis
+      } else return false; // stack was empty
     }
-    return true
+    return true;
   }
 };
 console.log(validParenthesis("()[]{}"));
 
 //FIRST OCCURENCE
-// Given two strings needle and haystack, 
+// Given two strings needle and haystack,
 //return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
 
-const firstOccurence =(haystack, needle)=>{
- return haystack.indexOf(needle)
-}
-console.log(firstOccurence("sadbutsad","nut"));
-
+const firstOccurence = (haystack, needle) => {
+  return haystack.indexOf(needle);
+};
+console.log(firstOccurence("sadbutsad", "nut"));
 
 //******************************** */
 //Search Insert Position
-//Given a sorted array of distinct integers and a target value, return the index if the target is found. 
+//Given a sorted array of distinct integers and a target value, return the index if the target is found.
 //If not, return the index where it would be if it were inserted in order.
 //You must write an algorithm with O(log n) runtime complexity.
 
-const insertPosition =(nums,target)=>{
-
-  for (let i=0; i<nums.length;i++){
-    if(nums[i]>=target){
-      return i
+const insertPosition = (nums, target) => {
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] >= target) {
+      return i;
     }
   }
-  return nums.length //will be at the end of the array
-}
-console.log(insertPosition([1,2,3,4,6,7,8],5));
-
-//To achieve O(log n) runtime complexity, you should use a binary search algorithm. 
-
-const insertPos =(nums,target)=>{
-
-  let left =0;
-  let right =nums.length -1
-  
-
- while(left<right){
-  let middle = Math.floor((left +right)/2)
-
-  if (target = nums[middle]){
-    return middle
-  }
- else if (target <nums[middle] ){
-    right =middle -1
-  }
-  else {left = middle +1}
-
- }
-return left  //target not found, return the insertion point
-}
-console.log(insertPos([1,2,3,4,6,7,8],5));
-
-var searchInsert = function(nums, target) {
-  let left = 0;
-  let right = nums.length -1
-
-  while(left <= right){
-      let middle = Math.floor((right + left)/2)
-
-      if (target === nums[middle]){
-          return middle
-      }
-      if (target < nums[middle]){
-          right = middle-1
-      }
-      else{
-          left =middle +1
-      }
-  }
-  return left
+  return nums.length; //will be at the end of the array
 };
-console.log("search insert",searchInsert([1,3,5,6],5)); 
+console.log(insertPosition([1, 2, 3, 4, 6, 7, 8], 5));
+
+//To achieve O(log n) runtime complexity, you should use a binary search algorithm.
+
+const insertPos = (nums, target) => {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    let middle = Math.floor((left + right) / 2);
+
+    if ((target = nums[middle])) {
+      return middle;
+    } else if (target < nums[middle]) {
+      right = middle - 1;
+    } else {
+      left = middle + 1;
+    }
+  }
+  return left; //target not found, return the insertion point
+};
+console.log(insertPos([1, 2, 3, 4, 6, 7, 8], 5));
+
+var searchInsert = function (nums, target) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left <= right) {
+    let middle = Math.floor((right + left) / 2);
+
+    if (target === nums[middle]) {
+      return middle;
+    }
+    if (target < nums[middle]) {
+      right = middle - 1;
+    } else {
+      left = middle + 1;
+    }
+  }
+  return left;
+};
+console.log("search insert", searchInsert([1, 3, 5, 6], 5));
 
 //PLUS ONE
 //You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
@@ -580,16 +573,62 @@ console.log("search insert",searchInsert([1,3,5,6],5));
 //Input: digits = [1,2,3] Output: [1,2,4] Explanation: The array represents the integer 123.
 //Incrementing by one gives 123 + 1 = 124.Thus, the result should be [1,2,4].
 
-const plusOne = (digits)=>{
-
-  for(let i= digits.length-1; i>=0; i--){
-    if (digits[i] < 9){
-      digits[i]++
-    
+const plusOne = (digits) => {
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (digits[i] < 9) {
+      digits[i]++;
     }
-    digits[i]=0
+    digits[i] = 0;
   }
-digits.unshift(1)
-return digits
-}
-console.log(plusOne([1,2,9]));
+  digits.unshift(1);
+  return digits;
+};
+console.log(plusOne([1, 2, 9]));
+
+//Happy number
+//Starting with any positive integer, replace the number by the sum of the squares of its digits.
+
+const getSumOfSquares = (num) => {
+  let sum = 0;
+  const digits = num.toString().split(""); //convert numbrs to string and to array
+  for (let i = 0; i < digits.length; i++) {
+    sum += Math.pow(parseInt(digits[i]), 2); // parseInt converts each digits back to integer
+  }
+  return sum;
+};
+
+const happyNum = (num) => {
+  let slow = num;
+  let fast = getSumOfSquares(num);
+
+  while (slow !== fast && fast !== 1) {
+    slow = getSumOfSquares(slow); //updated with the result of the respective sum!
+    fast = getSumOfSquares(getSumOfSquares(fast)); //updated with the result of the respective sum"
+  }
+
+  return fast === 1;
+};
+
+console.log("happy num", happyNum(19));
+
+//SUMMARY OF RANGES. You are given a sorted unique integer array nums.
+//Return the smallest sorted list of ranges that cover all the numbers in the array exactly.
+
+const sumaryOfRanges = (num) => {
+  let range = [];
+  let start = 0;
+
+  for (let i = 0; i < num.length; i++) {
+    if (num[i + 1] !== num[i] + 1 || i + 1 === num.length) {
+      if (start === i) {
+        range.push(`${num[start]}`);
+      } else {
+        range.push(`${num[start]} -> ${num[i]}`);
+      }
+      start = i + 1;
+    }
+  }
+  return range;
+};
+
+console.log(sumaryOfRanges([1, 2, 3, 5, 6, 9]));
