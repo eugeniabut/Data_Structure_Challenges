@@ -632,3 +632,33 @@ const sumaryOfRanges = (num) => {
 };
 
 console.log(sumaryOfRanges([1, 2, 3, 5, 6, 9]));
+
+
+// Valid palindrome
+const isPalindrome2 =(s)=>{
+let cleanedStr = s.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()
+
+let reversed =""
+for (let i = cleanedStr.length-1; i>=0; i--){
+  reversed += cleanedStr[i]
+}
+return cleanedStr === reversed
+}
+console.log(isPalindrome2("A man, a plan, a canal: Panama"));
+
+
+// is Subsequence Input: s = "abc", t = "ahbgdc"  Output: true
+
+const isSubsequence1 = (s,t)=>{
+let sIndex = 0 // pointer for s string
+
+for( let i = 0; i< t.length; i++){
+  if (t[i]=== s[sIndex]){
+    sIndex++
+  }
+}
+return sIndex ===s.length
+}
+console.log(isSubsequence1("abc", "ahbgdc"));
+
+ 
