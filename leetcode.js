@@ -661,4 +661,50 @@ return sIndex ===s.length
 }
 console.log(isSubsequence1("abc", "ahbgdc"));
 
- 
+
+
+//Container with most whater
+
+const maxArea =(h)=>{
+let left =0;                 // two pointers
+let right = h.length -1
+let maxArea = 0
+
+while (left <right){
+  let width = right - left;
+  let currentArea = Math.min(h[left],h[right])*width
+  if (maxArea < currentArea){
+    maxArea = currentArea
+    }
+
+  if (h[left] < h[right]){
+  left++
+   } else{
+    right--
+  }
+
+}
+return maxArea
+}
+console.log(maxArea([1,8,6,2,5,4,8,3,7]));
+
+ //Two Sum II 
+
+ const twoSum = (numbers, target)=>{
+
+  let left =0;
+  let right = numbers.length -1
+  
+  while (left < right){
+  
+    let sum = numbers[left] + numbers[right]
+    if (sum === target){
+      return [left +1, right +1]
+    } else if (sum < target){
+      left++  }else{
+          right--
+      }}
+      return [] // in case no solution
+ }
+
+ console.log(twoSum([2,7,11,15], 9))
