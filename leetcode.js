@@ -708,3 +708,40 @@ console.log(maxArea([1,8,6,2,5,4,8,3,7]));
  }
 
  console.log(twoSum([2,7,11,15], 9))
+
+ //Reverse words in string . //Input: s = "the    sky is blue   " Output: "blue is sky the"
+
+ var reverseWords = function(s) {
+    const arrOfWords = s.trim().split(/\s+/);
+    let reversed = []
+
+    for (let i = arrOfWords.length-1; i >=0; i--){
+    reversed.push(arrOfWords[i])
+    }
+    return reversed.join(" ");
+ };
+ console.log(reverseWords("the sky is blue"));
+
+ //ZIGZAG Conversion 
+
+ var convert = function(s, numRows) {
+    
+  let rows = new Array(numRows).fill(""); // if numRows =3, creates array with 3 empty rows ["","",""] 
+  let currentRow =0;
+  let goingDown = false;
+  for(let i =0; i<s.length; i++){
+    rows[currentRow] +=s[i]  //Traverse the string and place each character in the appropriate row
+
+  if(currentRow === 0 || currentRow === numRows -1){
+    goingDown = !goingDown     //  Change direction when we reach the top or bottom row
+  }
+  if(goingDown){
+    currentRow +=1 // Move down to the next row
+  } else{
+    currentRow -=1 // Move down up the next row
+  }
+
+  }
+return rows.join("")
+ };
+ console.log(convert("PAYPALISHIRING",3));
